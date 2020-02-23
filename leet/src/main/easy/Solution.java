@@ -1,13 +1,10 @@
-package easy;
+package main.easy;
 
-import main.Main;
-import model.ListNode;
-import model.TreeNode;
-import org.junit.Test;
+import main.model.ListNode;
+import main.model.TreeNode;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Solution {
 
@@ -204,12 +201,20 @@ public class Solution {
 
     public String freqAlphabets(String s) {
         char[] cArr = s.toCharArray();
-        char[] cSol = new char[s.length()];
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < cArr.length; i++){
-            if(cArr[i+2] == '#'){
-                sb.append(Character.toString())
+            int c = cArr[i] + 48;
+            if(i+2 < cArr.length && cArr[i+2] == '#'){
+                if(cArr[i] == '1') {
+                    c = cArr[i + 1] + 10 + 48;
+                }
+                else{
+                    c = cArr[i + 1] + 20 + 48;
+                }
+                i+=2;
             }
+            sb.append((char) c);
         }
+        return sb.toString();
     }
 }

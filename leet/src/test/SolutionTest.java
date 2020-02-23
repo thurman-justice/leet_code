@@ -1,10 +1,8 @@
 package test;
 
-import com.sun.source.tree.Tree;
-import easy.Solution;
-import main.Main;
-import model.ListNode;
-import model.TreeNode;
+import main.easy.Solution;
+import main.model.ListNode;
+import main.model.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -102,15 +100,18 @@ public class SolutionTest {
 
     @Test
     public void freqAlphabets() {
-        Assert.assertEquals("jkab", "10#11#12");
+
+        Assert.assertEquals("jkab", s.freqAlphabets("10#11#12"));
+        Assert.assertEquals("acz", s.freqAlphabets("1326#"));
+        Assert.assertEquals("y", s.freqAlphabets("25#"));
+        Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", s.freqAlphabets("12345678910#11#12#13#14#15#16#17#18#19#20#21#22#23#24#25#26#"));
     }
     private void makeNodeList(int[] arr, ListNode root){
         root.val = arr[0];
         ListNode prev = root;
         for(int i = 1; i < arr.length; i++){
             ListNode node = new ListNode(arr[i]);
-            if(prev != null)
-                prev.next = node;
+            prev.next = node;
             prev = node;
         }
     }
