@@ -4,6 +4,8 @@ import main.model.ListNode;
 import main.model.TreeNode;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class Solution {
@@ -229,5 +231,63 @@ public class Solution {
         }
         arr[arr.length-1] = -1;
         return arr;
+    }
+
+    public int[] sumZero(int n) {
+        int[] arr = new int[n];
+        int sum = 0;
+        for(int i = 0; i < n; i++){
+            arr[i] = i;
+            sum += i;
+        }
+        arr[0] = 0 - sum;
+        return arr;
+    }
+
+    public String removeOuterParentheses(String S) {
+        StringBuilder sb = new StringBuilder();
+        int lSum = 1;
+        for(int i = 1; i < S.length(); i++){
+            char c = S.charAt(i);
+            if(S.charAt(i) == '('){
+                lSum ++;
+            }
+            if(S.charAt(i) == ')'){
+                lSum --;
+            }
+            if(lSum != 0){
+                sb.append(S.charAt(i));
+            }
+            else{
+                lSum = 1;
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] morse = new String[]{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        Set<String> unique = new HashSet();
+        for(String word : words){
+            String morseWord = "";
+            for(char c : word.toCharArray()){
+                morseWord += morse[c - 97];
+            }
+            unique.add(morseWord);
+        }
+        return unique.size();
+    }
+
+    public int[][] flipAndInvertImage(int[][] A) {
+        int[][] result = new int[A.length][A[0].length];
+        for(int i = 0; i < A.length; i++){
+            int k = 0;
+            for(int j = A[i].length-1; j > -1; j--){
+                result[i][k] = Math.abs(A[i][j] - 1);
+                k++;
+            }
+        }
+        return result;
     }
 }

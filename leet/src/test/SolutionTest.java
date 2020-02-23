@@ -113,6 +113,34 @@ public class SolutionTest {
         Assert.assertArrayEquals(new int[]{18,6,6,6,1,-1}, s.replaceElements(new int[]{17, 18,5,6,6,1}));
     }
 
+    @Test
+    public void sumZero(){
+        int[] arr = s.sumZero(5);
+        int sum = 0;
+        for(int i : arr){
+            sum += i;
+        }
+        Assert.assertEquals(0, sum);
+    }
+
+    @Test
+    public void removeOuterParentheses(){
+        Assert.assertEquals("()()()", s.removeOuterParentheses("(()())(())"));
+        Assert.assertEquals("()()()()(())", s.removeOuterParentheses("(()())(())(()(()))"));
+        Assert.assertEquals("", s.removeOuterParentheses("()()"));
+    }
+
+    @Test
+    public void uniqueMorseRepresentations(){
+        Assert.assertEquals(2, s.uniqueMorseRepresentations(new String[]{"gin", "zen", "gig", "msg"}));
+    }
+
+    @Test
+    public void flipAndInvertImage(){
+        int[][] arr = new int[][] {{1,1,0},{1,0,1},{0,0,0}};
+        int[][] result = s.flipAndInvertImage(arr);
+    }
+
     private void makeNodeList(int[] arr, ListNode root){
         root.val = arr[0];
         ListNode prev = root;
