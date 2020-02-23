@@ -5,6 +5,7 @@ import main.model.ListNode;
 import main.model.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.notification.RunListener;
 
 public class SolutionTest {
 
@@ -106,6 +107,12 @@ public class SolutionTest {
         Assert.assertEquals("y", s.freqAlphabets("25#"));
         Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", s.freqAlphabets("12345678910#11#12#13#14#15#16#17#18#19#20#21#22#23#24#25#26#"));
     }
+
+    @Test
+    public void replaceElements(){
+        Assert.assertArrayEquals(new int[]{18,6,6,6,1,-1}, s.replaceElements(new int[]{17, 18,5,6,6,1}));
+    }
+
     private void makeNodeList(int[] arr, ListNode root){
         root.val = arr[0];
         ListNode prev = root;

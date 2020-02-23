@@ -217,4 +217,17 @@ public class Solution {
         }
         return sb.toString();
     }
+
+    public int[] replaceElements(int[] arr) {
+        int max = arr[arr.length-1];
+        for(int i = arr.length -2 ; i>-1; i--){
+            int j = arr[i];
+            arr[i] = max;
+
+            if(j > max)
+                max = j;
+        }
+        arr[arr.length-1] = -1;
+        return arr;
+    }
 }
