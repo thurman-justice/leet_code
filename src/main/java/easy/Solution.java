@@ -1,11 +1,11 @@
-package main.easy;
+package easy;
 
 import main.model.ListNode;
 import main.model.TreeNode;
+import utility.Array;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solution {
@@ -287,6 +287,108 @@ public class Solution {
                 result[i][k] = Math.abs(A[i][j] - 1);
                 k++;
             }
+        }
+        return result;
+    }
+
+    public int[] sortArrayByParity(int[] A) {
+        int[] result = new int[A.length];
+        int oddLoc = A.length-1;
+        int evenLoc = 0;
+
+        for(int i = 0; i < A.length; i++){
+            if(A[i]%2 == 0) {
+                result[evenLoc] = A[i];
+                evenLoc++;
+            }
+            else {
+                result[oddLoc] = A[i];
+                oddLoc--;
+            }
+        }
+        return result;
+    }
+
+    public int repeatedNTimes(int[] A) {
+        int[] counts = IntStream.generate(() -> 0).limit(10000).toArray();
+        int lim = A.length/2;
+        for(int i = 0; i < A.length; i++){
+            counts[A[i]]++;
+            if(counts[A[i]] >= lim){
+                return A[i];
+            }
+        }
+        return 0;
+    }
+
+    public boolean uniqueOccurrences(int[] arr) {
+        Map<Integer, Integer> m = new HashMap<>();
+        for(int a : arr){
+            if(m.get(a) == null)
+                m.put(a, 1);
+            else
+                m.put(a, m.get(a)+1);
+        }
+        return m.values().stream().filter(i -> Collections.frequency(m.values(), i) >1)
+                .collect(Collectors.toSet()).size() == 0;
+    }
+
+    public  List<Integer> selfDividingNumbers(int left, int right){
+        List<Integer> result = new ArrayList<>();
+        for(int i = right; i >= left; i--) {
+            int number = i;
+            boolean selfDividing = true;
+            while (number > 0) {
+                int digit = number % 10;
+                if(digit == 0 || number % digit != 0){
+                    selfDividing = false;
+                }
+                number = number / 10;
+            }
+            if(selfDividing){
+                result.add(0, i);
+            }
+        }
+        return result;
+    }
+
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] result = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            int count = 0;
+            for(int j = 0; j < nums.length; j++){
+                if(nums[i] > nums[j])
+                    count++;
+            }
+            result[i] = count;
+        }
+        return result;
+    }
+
+    public int[] createTargetArray(int[] nums, int[] index) {
+        int[] result = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            if(i <= index[i]) {
+                result[index[i]] = nums[i];
+            }
+            else {
+                for(int j = nums.length-2; j >= index[i]; j--) {
+                    int next = j+1;
+                    result[next] = result[j];
+                }
+                result[index[i]] = nums[i];
+            }
+        }
+        return result;
+    }
+
+    public int[] shuffle(int[] nums, int n) {
+        int[] result = new int[2*n];
+        int k = 0;
+        for(int i = 0; i < n; i++){
+            result[k] = nums[i];
+            result[k+1] = nums[i+n];
+            k = k+2;
         }
         return result;
     }
